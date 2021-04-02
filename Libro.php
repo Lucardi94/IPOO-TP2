@@ -134,11 +134,11 @@
 
         public function __toString()
         {
-            return  $this->getSbn()."\n".
+            return  $this->getAnioEdicion()." - ".
+                    $this->getSbn()." - ".
                     $this->getTitulo()."\n".
-                    $this->getAnioEdicion()."\n".
-                    $this->getEditorial()."\n".
-                    $this->getAutor()."\n".
+                    $this->getEditorial()." - ".
+                    $this->getAutor()->getNombre()." ".$this->getAutor()->getApellido()." - ".
                     $this->getCantidadPagina()."\n".
                     $this->getSinopsis()."\n";
         }
