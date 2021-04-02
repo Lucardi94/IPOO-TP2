@@ -30,7 +30,7 @@
             $this->listaTramite = $nLisT;
         }
         public function setListaObjCliente($nLisOC){
-            $this->listaTramite = $nLisOC;            
+            $this->listaObjCliente = $nLisOC;            
             $this->setCapacidadTotal(count($nLisOC));
         }
         public function setCapacidadTotal($nCapT){
@@ -40,10 +40,23 @@
             $this->listaTramite = $nCapA;
         }
 
+        public function atiende($unTramite){
+            $lista = $this->getListaTramite();
+            $i = 0;
+            $atiende = FALSE;
+
+            while ($i<count($lista) && !$atiende){
+                if ($lista[$i] == $unTramite){
+                    $atiende = TRUE;
+                }
+                $i++;
+            }
+            return $atiende;
+        }
+
         public function textoTramite(){
             $txt = "\n";
-            $lista = $this->getListaTramite();
-            foreach ($lista as $tramite){
+            foreach ($this->getListaTramite() as $tramite){
                 $txt = $txt."                     -".$tramite."\n";
             }
             return $txt;
@@ -51,8 +64,7 @@
 
         public function textoCliente(){
             $txt = "\n";
-            $lista = $this->getListaObjCliente();
-            foreach ($lista as $cliente){
+            foreach ($this->getListaObjCliente() as $cliente){
                 $txt = $txt."                     -".$cliente->getApellido()."\n";
             }
             return $txt;
@@ -60,7 +72,7 @@
 
         public function __toString()
         {
-            return  "[Mostrador]Tramites: ".$this->textoTramite().
+            return  "Tramites: ".$this->textoTramite().
                     "\n           Clientes: ".$this->textoCliente().
                     "\nCapacidad total ".$this->getCapacidadTotal()." personas".
                     "\nCapacidad actual ".$this->getCapacidadActual()." persona/s";
